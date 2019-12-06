@@ -2,26 +2,32 @@ import React from 'react';
 import Axios from 'axios';
 import './App.css';
 
+import PlayerList from './components/PlayerList';
+
+import "./styles.scss";
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      player: []
+      players: [],
+      darkMode: false
     }
   }
 
   componentDidMount() {
     Axios.get('http://localhost:5000/api/players')
     .then(res => {
-      this.setState({player: res.data});
-      console.log(this.state.player);
+      this.setState({players: res.data});
+      console.log(this.state.players);
     })
   }
 
   render() {
     return(
-      <div>
-
+      <div className='App'>
+        <h1>women soccer players</h1>
+        <PlayerList players={this.state.players} />
       </div>
     );
   }
